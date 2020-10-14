@@ -8,6 +8,7 @@ Code, Compile, Run and Debug online from anywhere in world.
 *******************************************************************************/
 #include <iostream>
 #include <queue> 
+#include <limits.h>
 using namespace std;
 
 
@@ -193,6 +194,61 @@ Node* delete_node(Node* node, int val)
     return node;
 }
 
+bool issubtreeLessor(Node* node,int value)
+{
+    if(node == NULL) return true;
+     if(  node->data < value &&  
+            issubtreeLessor(node->left, value) && 
+                issubtreeLessor(node->right, value) )
+                {
+                    return true;
+                }
+                else return false;
+}
+
+bool issubtreeGreater(Node* node,int value)
+{
+    if(node == NULL) return true;
+        if( node->data > value  &&  
+            issubtreeGreater(node->left, value) && 
+                issubtreeGreater(node->right, value) )
+                {
+                    return true;
+                }
+                else return false;
+
+}
+
+bool isBST(Node* root)
+{
+    
+    if(root == NULL) return true;
+    if( issubtreeLessor(root->left, root->data ) &&
+        issubtreeGreater(root->right, root->data) &&
+        isBST(root->left) &&
+        isBST(root->right) )
+    {
+        return true;
+    }
+    else
+        return false;
+}
+
+bool isBST_range(Node* root,int min, int max)
+{
+    
+    if(root == NULL) return true;
+    if( root->data > min  &&
+        root->data < max &&
+        isBST_range(root->left,min, root->data ) &&
+        isBST_range(root->right,root->data, max) )
+    {
+        return true;
+    }
+    else
+        return false;
+}
+
 int main()
 {
 
@@ -249,6 +305,12 @@ int main()
 
     
     printBST_bfs(root);
+    
+    
+    
+    cout << "Is BST " <<  isBST(root) << endl;
+    
+    cout << "Is BST - method2 " << isBST_range(root, INT_MIN, INT_MAX);
 
     return 0;
 }
