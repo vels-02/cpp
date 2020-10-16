@@ -51,13 +51,21 @@ int BinarySearch(int arr[], int n, int x,bool firstoccur)
 
 int main()
 {
-
-
-    int arr[]  = {2, 4, 10, 10, 10, 18, 20};
+   int arr[]  = {2, 4, 5, 5, 5, 5, 5, 5, 10, 10, 10, 18, 20};
     
     int len = sizeof(arr) / sizeof(arr[0]);
-    
-    cout << "index of 10 is " << BinarySearch(arr, 7, 10, true) << endl;
+    cout << "first index of 5 is " << BinarySearch(arr, len, 5, true) << endl;
+   
+    int firstindex = BinarySearch(arr, len, 5, true);
+    if(firstindex == -1) {
+        cout << "element not found" << endl;
+    }
+    else
+    {
+         int lastindex = BinarySearch(arr, len, 5, false);
+         
+         cout << "Count is : " << (lastindex-firstindex) + 1 << endl;
+    }
 
     return 0;
 }
