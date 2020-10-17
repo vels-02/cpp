@@ -3,7 +3,7 @@
 Singly linked list
 
 1. insert node begin, end, after an element, at kth position
-2 Delete a node begin, end. 
+2 Delete a node begin, end , at kth position
 
 *******************************************************************************/
 
@@ -172,6 +172,35 @@ Node* insertNodekthpos(Node* head, int pos, int x)
     
     return head;
 }
+Node* deleteatpos(Node* head, int pos)
+{
+    if(head == NULL) {
+        cout << "list is empty"  << endl;
+        return head;
+    }
+        
+        if(pos == 1)
+        {
+            Node* tmp = head;
+            head = tmp->next;
+            delete tmp;
+            return head;
+        }
+        
+        Node* tmp1 = head;
+
+        for(int i = 0; i < pos-2; i++)
+        {
+            tmp1 = tmp1->next;
+        }
+        
+        Node *tmp2 = tmp1->next;
+        tmp1->next = tmp2->next;
+        delete tmp2;
+        
+        return head;
+}
+
 
 Node* deleteHead(Node* head)
 {
@@ -219,6 +248,8 @@ Node* deleteTail(Node* head)
     }
     
 }
+
+
 
 
 void printlist(Node* list)
@@ -285,6 +316,8 @@ int main()
     head1 = deleteTail(head1);
     printlist(head1);
     
+    head1 = deleteatpos(head1, 4); //delete 4th node - 25
+    printlist(head1);
 
     return 0;
 }
