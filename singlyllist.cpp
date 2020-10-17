@@ -3,7 +3,7 @@
 Singly linked list
 
 1. insert node begin, end, after an element, at kth position
-2 Delete a node begin, end , at kth position
+2 Delete a node begin, end. 
 
 *******************************************************************************/
 
@@ -41,6 +41,20 @@ Node* Reverse()
     return head;
     
 }
+Node* pre= NULL;
+Node* reverse_recusrion(Node* head){
+     //Node* newNode;
+     if(head == NULL){
+          //newNode = pre;   
+          return pre;
+     } 
+ 
+     Node* temp = head->next;
+     head->next = pre;
+     pre = head;
+     return reverse_recusrion(temp);
+}
+
 
  Node* addtoEmpty(Node *list, int x)
 {
@@ -270,7 +284,32 @@ void printlist(Node* list)
     cout << endl;
 }
 
+void print_recursion(Node* node)
+{
 
+    if(node == NULL )
+    {
+        cout << endl;
+        return;
+    }
+    cout << node->data << " ";
+    print_recursion(node->next);
+    
+
+}
+
+void print_reverse(Node* node)
+{
+
+    if(node == NULL )
+    {
+        return;
+    }
+    print_reverse(node->next);
+    cout << node->data << " ";
+    
+
+}
 
 int main()
 {
@@ -303,6 +342,9 @@ int main()
     printlist(head1);
     
     head1 = insertNodekthpos(head1, 7, 25);
+    
+ 
+    
 
     printlist(head1);
     
@@ -316,8 +358,18 @@ int main()
     head1 = deleteTail(head1);
     printlist(head1);
     
-    head1 = deleteatpos(head1, 4); //delete 4th node - 25
+    head1 = deleteatpos(head1, 4); //delete 4th node - 25*/
     printlist(head1);
 
+    print_recursion(head1); 
+    
+    print_reverse(head1);
+    cout << endl;
+    
+
+    head1 = reverse_recusrion(head1);
+    printlist(head1);
+
+ 
     return 0;
 }
