@@ -17,10 +17,7 @@ int reverse(int n)
     while(n > 0)
     {
         rev_n = rev_n * 10 + n % 10;
-        cout << "rev_n " << rev_n << endl;
         n = n/10;
-        
-        cout << "n " << n << endl;
     }
     
     return rev_n;
@@ -37,10 +34,32 @@ bool isPalindrome(int n)
         return false;
 }
 
+
+int factorial(int n)
+{
+   /*    
+   int res = 1;
+    
+    for(int i = n;  i > 1 ; i--)
+    {
+        res = res * i;
+    }
+    
+    return res;*/
+    
+    if( n == 1) return n;
+    
+    return n * factorial( n-1 );
+    
+    
+    
+}
+
 int main()
 {
     int n;
     cin >> n;
+    cout <<  "Factorial of " << n << " : " << factorial(n) << endl;
     cout<< n << " is a palindrome - " <<  (isPalindrome(n)? "True " : "False") << endl;
 
     return 0;
